@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="walkthrough_next">Mai departe</string>
+    <string name="walkthrough_prev">Înapoi</string>
+    <string name="title_activity_maps">Harta</string>
+</resources>
