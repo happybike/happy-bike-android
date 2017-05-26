@@ -4,6 +4,8 @@ import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -55,13 +57,22 @@ public class WalkThrough extends AppCompatActivity {
         String title = this.getString(R.string.notif_title_good);
         String contentText = this.getString(R.string.notif_text_good);
 
+        Bitmap iconBike = BitmapFactory.decodeResource(getResources(),
+                R.drawable.ic_action_bike);
+        Bitmap picBike = BitmapFactory.decodeResource(getResources(),
+                R.drawable.bikeway);
+
+        NotificationCompat.Style notifStyle = new NotificationCompat.BigPictureStyle()
+                .bigLargeIcon(iconBike)
+                .bigPicture(picBike)
+                .setBigContentTitle(title)
+                .setSummaryText(contentText);
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(this)
                         .setSmallIcon(R.drawable.ic_notification)
                         .setContentTitle(title)
                         .setContentText(contentText)
-                        .setStyle(new NotificationCompat.BigTextStyle()
-                                .bigText(contentText))
+                        .setStyle(notifStyle)
                         .addAction (R.drawable.ic_action_bike,
                                 getString(R.string.go_bike), piResult)
                         .addAction (R.drawable.ic_action_tram,
