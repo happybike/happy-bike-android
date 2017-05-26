@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "473000610945",
+    "firebase_url": "https://happybike-3c4ff.firebaseio.com",
+    "project_id": "happybike-3c4ff",
+    "storage_bucket": "happybike-3c4ff.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:473000610945:android:33566abbd39b609e",
+        "android_client_info": {
+          "package_name": "space.velociraptors.happybike"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "473000610945-34vjmrolaosq3i0p75o33ghkvkp7ebal.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "space.velociraptors.happybike",
+            "certificate_hash": "8f17d9c5b67ce7a4396b9ad1bb5496ec5c6cb857"
+          }
+        },
+        {
+          "client_id": "473000610945-fsa2euu697dhmgbhce15jcp6e9prl8vk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCArVQ6z32c-ZvqveMMjpZmeEDCnDHpujM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "473000610945-fsa2euu697dhmgbhce15jcp6e9prl8vk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
