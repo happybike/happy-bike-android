@@ -1,5 +1,6 @@
 package space.velociraptors.happybike;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -37,7 +38,7 @@ public class WalkThrough extends AppCompatActivity {
     };
 
     private void gotoMapsActivity() {
-        // TODO
+        startActivity(new Intent(this, MapsActivity.class));
     }
 
     @Override
