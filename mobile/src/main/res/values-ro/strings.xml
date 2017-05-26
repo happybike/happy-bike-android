@@ -3,4 +3,8 @@
     <string name="walkthrough_next">Mai departe</string>
     <string name="walkthrough_prev">Înapoi</string>
     <string name="title_activity_maps">Harta</string>
+    <string name="go_bike">Am plecat!</string>
+    <string name="go_tram">Iau tramvaiul</string>
+    <string name="notif_text_good">Vremea va fi excelenta!</string>
+    <string name="notif_title_good">Mergi cu bicicleta la lucru azi?</string>
 </resources>
