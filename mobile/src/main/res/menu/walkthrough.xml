@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/walkthrough_previous"
+        android:icon="@drawable/ic_arrow_left"
+        android:title="@string/walkthrough_prev" />
+
+    <item
+        android:id="@+id/walkthrough_next"
+        android:icon="@drawable/ic_arrow_right"
+        android:title="@string/walkthrough_next" />
+</menu>
