@@ -1,6 +1,8 @@
 package space.velociraptors.happybike;
 
 import android.content.pm.PackageManager;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -24,6 +26,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
@@ -111,7 +114,7 @@ public class MapsFragment extends Fragment implements DownloadCompleteListener,
                     // for ActivityCompat#requestPermissions for more details.
                     return;
                 }
-                googleMap.setMyLocationEnabled(true);
+//                googleMap.setMyLocationEnabled(true);
                 if (isNetworkConnected()) {
                     mProgressDialog = new ProgressDialog(getActivity());
                     mProgressDialog.setMessage("Please wait...");
@@ -142,7 +145,9 @@ public class MapsFragment extends Fragment implements DownloadCompleteListener,
         }
 
         LatLng myLocation = new LatLng(currentLatitude, currentLongitude);
-        MarkerOptions markerOptions = new MarkerOptions().position(myLocation).title("I am here");
+        Drawable drawable = getActivity().getResources().getDrawable(R.drawable.my_location_pin, getActivity().getTheme());
+        MarkerOptions markerOptions = new MarkerOptions().position(myLocation).title("I am here")
+                .icon(BitmapDescriptorFactory.fromBitmap(((BitmapDrawable)drawable).getBitmap()));
         currLocationMarker = googleMap.addMarker(markerOptions);
 
         // For zooming automatically to the location of the marker
@@ -196,18 +201,36 @@ public class MapsFragment extends Fragment implements DownloadCompleteListener,
     private double latitude;
     private double longitude;
     private String title;
+    private int noBikes;
+
+    private Drawable getStationPin(int noBikes) {
+        int pin;
+        if (noBikes < 5) {
+            pin = R.raw.pingray;
+        } else if (noBikes < 15) {
+            pin = R.raw.pinblue;
+        } else {
+            pin = R.raw.pinyellow;
+        }
+
+        return getActivity().getResources().getDrawable(pin, getActivity().getTheme());
+    }
 
     @Override
     public void downloadComplete(JSONArray stations) {
+
         for(int i = 0 ; i < stations.length() ; i++ ) {
             try {
                 station = stations.getJSONObject(i);
                 latitude = station.getDouble("Latitude");
                 longitude = station.getDouble("Longitude");
                 title = station.getString("StationName");
+                noBikes = station.getInt("EmptySpots");
+
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+
             googleMap.addMarker(new MarkerOptions()
                     .position(new LatLng(latitude, longitude))
                     .title(title));
