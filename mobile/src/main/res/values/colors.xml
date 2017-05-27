@@ -7,7 +7,8 @@
     <color name="itemMenuSelected">#0066CC</color>
     <color name="itemMenu">#888C92</color>
 
-    <color name="colorNotifBlur">#C0FFFFFF</color>
+    <color name="colorNotifBlur">#245672</color>
+    <color name="colorNotifBlur2">#63bf52</color>
     <color name="colorNotifPrimary">#FFFFFF</color>
-    <color name="colorNotifAccent">#000020</color>
+    <color name="colorNotifAccent">#FFFFFF</color>
 </resources>
