@@ -5,10 +5,40 @@
     tools:context="space.velociraptors.happybike.HelpFragment">
 
     <TextView
+        android:id="@+id/help_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:text="Help"
+        android:text="Call for Help"
         android:textSize="30sp"/>
 
+    <Button
+        android:id="@+id/alert_accident"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/help_title"
+        android:text="Accident"
+        android:onClick="onAlert"
+        />
+
+    <Button
+        android:id="@+id/alert_broken_bike"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/alert_accident"
+        android:text="Broken bike"
+        android:onClick="onAlert"
+        />
+
+    <Button
+        android:id="@+id/alert_stolen_bike"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/alert_broken_bike"
+        android:text="Stolen bike"
+        android:onClick="onAlert"
+        />
 </RelativeLayout>

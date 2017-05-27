@@ -104,6 +104,8 @@ public class MapsFragment extends Fragment implements DownloadCompleteListener,
                 try {
                     KmlLayer layer = new KmlLayer(mMap, R.raw.pistebici, getContext());
                     layer.addLayerToMap();
+                    new KmlLayer(mMap, R.raw.places_to_visit, getContext()).addLayerToMap();
+                    new KmlLayer(mMap, R.raw.bicycle_danger_zones_update, getContext()).addLayerToMap();
                 } catch (XmlPullParserException e) {
                     e.printStackTrace();
                 } catch (IOException e) {

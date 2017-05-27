@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>Places to visit</name>
+    <Style id="icon-1899-0288D1-normal">
+      <IconStyle>
+        <color>ffd18802</color>
+        <scale>1</scale>
+        <Icon>
+          <href>http://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+        </Icon>
+        <hotSpot x="16" xunits="pixels" y="32" yunits="insetPixels"/>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+    </Style>
+    <Style id="icon-1899-0288D1-highlight">
+      <IconStyle>
+        <color>ffd18802</color>
+        <scale>1</scale>
+        <Icon>
+          <href>http://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+        </Icon>
+        <hotSpot x="16" xunits="pixels" y="32" yunits="insetPixels"/>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+    </Style>
+    <StyleMap id="icon-1899-0288D1">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-1899-0288D1-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-1899-0288D1-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Placemark>
+      <name>Catedrala Mitropolitana</name>
+      <description><![CDATA[<img src="https://lh6.googleusercontent.com/_a1yewQz0CITuvywb00bw4yrqaxIGMMyBqMu141QAAGetKHq2-2IjsGn6Aal3RZA8HZGyB_-pHsIrtdr05CfVDet5mGWJERh2ayBE9wnba7khIPUvifXBfyXRE6YBpNm" height="200" width="auto" /><br><br>]]></description>
+      <styleUrl>#icon-1899-0288D1</styleUrl>
+      <ExtendedData>
+        <Data name="gx_media_links">
+          <value>https://lh6.googleusercontent.com/_a1yewQz0CITuvywb00bw4yrqaxIGMMyBqMu141QAAGetKHq2-2IjsGn6Aal3RZA8HZGyB_-pHsIrtdr05CfVDet5mGWJERh2ayBE9wnba7khIPUvifXBfyXRE6YBpNm</value>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          21.2243414,45.7506961,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Opera Nationala Romana</name>
+      <description><![CDATA[<img src="https://lh5.googleusercontent.com/x3XPcTpYbxGSTnBSUVeQhczaGMlq6y7WJp2NsNOnzX_D44gyk2vmZe85Jx9Hp0R-qz2U_Et2d1WUTeTMPIzolCw81iRdD5SKA_ULHqgGPgXScrhz1VjaPvtFeGO2tSRO" height="200" width="auto" /><br><br>]]></description>
+      <styleUrl>#icon-1899-0288D1</styleUrl>
+      <ExtendedData>
+        <Data name="gx_media_links">
+          <value>https://lh5.googleusercontent.com/x3XPcTpYbxGSTnBSUVeQhczaGMlq6y7WJp2NsNOnzX_D44gyk2vmZe85Jx9Hp0R-qz2U_Et2d1WUTeTMPIzolCw81iRdD5SKA_ULHqgGPgXScrhz1VjaPvtFeGO2tSRO</value>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          21.2258649,45.7540499,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Stadionul Dan Paltinisanu</name>
+      <description><![CDATA[<img src="https://lh6.googleusercontent.com/NJK-ZGUXdDysLEa2_p3TS3qZ6DFSicIW8RWkPwJ3OKZjB7aSEgzgVV5uO4_aGjdWI30e4iMvnFefV--TE_7gFgvh7ny_w8atH99ncXXFz5CYLEbU8ceifsCW-igGmdU" height="200" width="auto" /><br><br>]]></description>
+      <styleUrl>#icon-1899-0288D1</styleUrl>
+      <ExtendedData>
+        <Data name="gx_media_links">
+          <value>https://lh6.googleusercontent.com/NJK-ZGUXdDysLEa2_p3TS3qZ6DFSicIW8RWkPwJ3OKZjB7aSEgzgVV5uO4_aGjdWI30e4iMvnFefV--TE_7gFgvh7ny_w8atH99ncXXFz5CYLEbU8ceifsCW-igGmdU</value>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          21.2440181,45.7404388,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Observatorul Astronomic Timisoara</name>
+      <description><![CDATA[<img src="https://lh4.googleusercontent.com/jl46SUKtUNJxYAVCpMZu4ETO_AudLtavBJuREEdhOEsobw0gDvxQohTiBFvWcy7bJXb0CwI9FJVO8pz2ajCYU3Q2yOfpaU6_X7FNTSpx0Zuqc35eisfQHnLXmIRQ_2vgGw" height="200" width="auto" /><br><br>]]></description>
+      <styleUrl>#icon-1899-0288D1</styleUrl>
+      <ExtendedData>
+        <Data name="gx_media_links">
+          <value>https://lh4.googleusercontent.com/jl46SUKtUNJxYAVCpMZu4ETO_AudLtavBJuREEdhOEsobw0gDvxQohTiBFvWcy7bJXb0CwI9FJVO8pz2ajCYU3Q2yOfpaU6_X7FNTSpx0Zuqc35eisfQHnLXmIRQ_2vgGw</value>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          21.2305856,45.7383122,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Bastion</name>
+      <description><![CDATA[<img src="https://lh6.googleusercontent.com/v6x8LHl_UUFpoU-Ogiz_kNtnJ7cUBkJ1rIuDE9N1yLGMemxU19TpP42HVQRiYidZga-q2vHsxOEqLkc9vhQPL0D074ZmEyuhYvvwy-bxzI8-muiHtqyK6B5FHckfcsLO" height="200" width="auto" /><br><br><br><br><img src="https://lh6.googleusercontent.com/3pb5KK7_wIxgC4xxqnRCGDfZaCFygupnQb8pW5vyr8LIpnZFaZUC0VpEk7fPAhydoYKlVQmH0hq9CfO1lgMz0vPGytxcVIOaU_Ec5iUQaeGEs13Jk_iIpZVFI2JdRn8" height="200" width="auto" />]]></description>
+      <styleUrl>#icon-1899-0288D1</styleUrl>
+      <ExtendedData>
+        <Data name="gx_media_links">
+          <value>https://lh6.googleusercontent.com/v6x8LHl_UUFpoU-Ogiz_kNtnJ7cUBkJ1rIuDE9N1yLGMemxU19TpP42HVQRiYidZga-q2vHsxOEqLkc9vhQPL0D074ZmEyuhYvvwy-bxzI8-muiHtqyK6B5FHckfcsLO https://lh6.googleusercontent.com/3pb5KK7_wIxgC4xxqnRCGDfZaCFygupnQb8pW5vyr8LIpnZFaZUC0VpEk7fPAhydoYKlVQmH0hq9CfO1lgMz0vPGytxcVIOaU_Ec5iUQaeGEs13Jk_iIpZVFI2JdRn8</value>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          21.2334609,45.7569918,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Piata Unirii</name>
+      <description><![CDATA[<img src="https://lh3.googleusercontent.com/olMzY5tzoFLd7JdRIcuwHm4Zh2xp88jEtw1uXFsy8IVhRykTrIoeDIyOgXjaw2UO_Uq4FSGoDcZKUBduwORYcLXp2qsrXOvUy3J2FAPPE7RQiFa5VnoEubZ9e7I5e8Hf" height="200" width="auto" /><br><br><br><br><img src="https://lh6.googleusercontent.com/Hpj2yuXsFXB9xb-hBE2fwuhSps-h-TBM-sjB3wCp2HE6awKOt4NZG4wVoia07JnC539Qy1qgBPSPTWBl73tXY_sagKr1aWLj8V7_ovpY9pKh95fzQGGUp2gs9tt8gsuMrQ" height="200" width="auto" />]]></description>
+      <styleUrl>#icon-1899-0288D1</styleUrl>
+      <ExtendedData>
+        <Data name="gx_media_links">
+          <value>https://lh3.googleusercontent.com/olMzY5tzoFLd7JdRIcuwHm4Zh2xp88jEtw1uXFsy8IVhRykTrIoeDIyOgXjaw2UO_Uq4FSGoDcZKUBduwORYcLXp2qsrXOvUy3J2FAPPE7RQiFa5VnoEubZ9e7I5e8Hf https://lh6.googleusercontent.com/Hpj2yuXsFXB9xb-hBE2fwuhSps-h-TBM-sjB3wCp2HE6awKOt4NZG4wVoia07JnC539Qy1qgBPSPTWBl73tXY_sagKr1aWLj8V7_ovpY9pKh95fzQGGUp2gs9tt8gsuMrQ</value>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          21.2289441,45.75792,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Ecluza cetatii</name>
+      <description><![CDATA[<img src="https://lh6.googleusercontent.com/mB-5N88hYulK-_b4ok3sWQX_he23E_-dZRHg8OGNTNFggvfd7UDOvAXpqyDWNN5c0IxGN_rcXHKnatQcHO26FWpYQ-eYnvMoHrXcAMobo7KoR6Wscwq-VT5tAHgqHqw" height="200" width="auto" /><br><br>]]></description>
+      <styleUrl>#icon-1899-0288D1</styleUrl>
+      <ExtendedData>
+        <Data name="gx_media_links">
+          <value>https://lh6.googleusercontent.com/mB-5N88hYulK-_b4ok3sWQX_he23E_-dZRHg8OGNTNFggvfd7UDOvAXpqyDWNN5c0IxGN_rcXHKnatQcHO26FWpYQ-eYnvMoHrXcAMobo7KoR6Wscwq-VT5tAHgqHqw</value>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          21.2216592,45.75661,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Parcul rozelor</name>
+      <description><![CDATA[<img src="https://lh6.googleusercontent.com/5s9SsBzXuNUiah-a534FnFEwKfAaVHRVhmXabqZAvN0H4oNbklctpeHoKgLRcOnomBzOtQtM_NelNsM0dO1g7uMXQujQqHp7zE4LifIO33XKBAPGSsTDR5SRfPnCKp8X2g" height="200" width="auto" /><br><br>]]></description>
+      <styleUrl>#icon-1899-0288D1</styleUrl>
+      <ExtendedData>
+        <Data name="gx_media_links">
+          <value>https://lh6.googleusercontent.com/5s9SsBzXuNUiah-a534FnFEwKfAaVHRVhmXabqZAvN0H4oNbklctpeHoKgLRcOnomBzOtQtM_NelNsM0dO1g7uMXQujQqHp7zE4LifIO33XKBAPGSsTDR5SRfPnCKp8X2g</value>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          21.2325275,45.7502844,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Muzeul Satului Banatean</name>
+      <description><![CDATA[<img src="https://lh4.googleusercontent.com/GeYjguTtA-FICCr4VubHPJHWcjtp0P4DBInDzbC_ekB7YRioQS9-1-5U0kvFcSjjMuZn7-nm0FQzqtAs0ztMrdW5Q_ra1bNB65Dvfeho1gNa_TSKnmamt3ESJ95cyxM" height="200" width="auto" /><br><br>]]></description>
+      <styleUrl>#icon-1899-0288D1</styleUrl>
+      <ExtendedData>
+        <Data name="gx_media_links">
+          <value>https://lh4.googleusercontent.com/GeYjguTtA-FICCr4VubHPJHWcjtp0P4DBInDzbC_ekB7YRioQS9-1-5U0kvFcSjjMuZn7-nm0FQzqtAs0ztMrdW5Q_ra1bNB65Dvfeho1gNa_TSKnmamt3ESJ95cyxM</value>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          21.2636948,45.7795412,0
+        </coordinates>
+      </Point>
+    </Placemark>
+  </Document>
+</kml>

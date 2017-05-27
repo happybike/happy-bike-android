@@ -11,6 +11,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -58,5 +59,16 @@ public class MainActivity extends AppCompatActivity {
 
         //Used to select an item programmatically
         //bottomNavigationView.getMenu().getItem(2).setChecked(true);
+    }
+
+    public void onAlert(View view) {
+        switch (view.getId()) {
+            case R.id.alert_accident:
+                return;
+            case R.id.alert_broken_bike:
+                return;
+            case R.id.alert_stolen_bike:
+                return;
+        }
     }
 }
