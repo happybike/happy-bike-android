@@ -17,5 +17,6 @@
     <string name="scan_menu">SCAN</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="sample_temperature" translatable="false">25 C</string>
-    <string name="sample_location" translatable="false">Timisoara</string>
+    <string name="sample_location" translatable="false">Timisoara, Timis, Romania</string>
+    <string name="go_text">Awsome day for riding your bike to work</string>
 </resources>
