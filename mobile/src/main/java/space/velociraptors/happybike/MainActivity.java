@@ -4,6 +4,7 @@ package space.velociraptors.happybike;
  * Created by rpadurariu on 27.05.2017.
  */
 
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -13,11 +14,26 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 
-public class MainActivity extends AppCompatActivity {
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.Arrays;
+
+public class MainActivity extends AppCompatActivity implements ValueEventListener {
+    private Data data;
+    private JSONArray alerts = new JSONArray();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.data = new Data();
+        this.data.get(Const.ALERT_KEY, this);
+
         setContentView(R.layout.activity_main);
         BottomNavigationView bottomNavigationView = (BottomNavigationView)
                 findViewById(R.id.navigation);
@@ -61,14 +77,52 @@ public class MainActivity extends AppCompatActivity {
         //bottomNavigationView.getMenu().getItem(2).setChecked(true);
     }
 
+    public void daLocatia() {
+
+    }
+
     public void onAlert(View view) {
+        String alert = null;
         switch (view.getId()) {
             case R.id.alert_accident:
-                return;
+                alert = "Help! I've had an accident!";
+                break;
             case R.id.alert_broken_bike:
-                return;
+                alert = "Help! I've broken my bike!";
+                break;
             case R.id.alert_stolen_bike:
-                return;
+                alert = "Help! My bike was stolen!";
+                break;
         }
+        if (alert != null) {
+            if (alerts.length() >= 10 && Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                alerts.remove(0);
+            }
+
+            JSONObject a = new JSONObject();
+            try {
+                a.put("text", alert);
+                a.put("lon", "21.15");
+                a.put("lat", "21.15");
+                alerts.put(a);
+                data.put(Const.ALERT_KEY, alerts.toString());
+            } catch (JSONException e) {
+                // I don't care
+            }
+        }
+    }
+
+    @Override
+    public void onDataChange(DataSnapshot dataSnapshot) {
+        try {
+            this.alerts = new JSONArray((String)dataSnapshot.getValue());
+        } catch (JSONException e) {
+            // I don't care
+        }
+    }
+
+    @Override
+    public void onCancelled(DatabaseError databaseError) {
+        this.alerts = new JSONArray();
     }
 }

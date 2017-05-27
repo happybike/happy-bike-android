@@ -9,4 +9,6 @@ public class Const {
     public static final String BIKE_TO = "bike-to";
     public static final String LOC_WORK = "work";
 
+    public static final String ALERT_KEY = "db-alerts";
+
 }
