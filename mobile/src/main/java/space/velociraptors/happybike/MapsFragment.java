@@ -57,6 +57,7 @@ public class MapsFragment extends Fragment implements DownloadCompleteListener,
     private double currentLongitude;
     private Marker currLocationMarker;
     LocationRequest mLocationRequest = createLocationRequest();
+    private Data data;
 
     public static MapsFragment newInstance() {
         MapsFragment fragment = new MapsFragment();
@@ -82,7 +83,7 @@ public class MapsFragment extends Fragment implements DownloadCompleteListener,
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_map, container, false);
-
+        this.data = new Data();
         mMapView = (MapView) rootView.findViewById(R.id.map);
         mMapView.onCreate(savedInstanceState);
 
