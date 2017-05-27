@@ -22,6 +22,7 @@ public class WalkThrough extends AppCompatActivity {
     private static int[] walkthroughImages = new int[]{R.drawable.bikeway, R.drawable.flowers, R.drawable.river};
     private ImageView walkthroughImage;
     private int currentImage = 0;
+    private Data data;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -127,6 +128,8 @@ public class WalkThrough extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.data = new Data();
+
         setContentView(R.layout.activity_walk_through);
 
         walkthroughImage = (ImageView) findViewById(R.id.walkthrough_image);

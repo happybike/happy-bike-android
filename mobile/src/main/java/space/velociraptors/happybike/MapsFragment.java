@@ -31,6 +31,7 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.maps.android.data.kml.KmlLayer;
 
 
 import android.support.v7.app.AlertDialog;
@@ -39,12 +40,11 @@ import android.support.v7.app.AlertDialog;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
 
 import okhttp3.MediaType;
-import okhttp3.OkHttpClient;
-import okhttp3.RequestBody;
 
 
 public class MapsFragment extends Fragment implements DownloadCompleteListener,
@@ -60,6 +60,7 @@ public class MapsFragment extends Fragment implements DownloadCompleteListener,
     private double currentLongitude;
     private Marker currLocationMarker;
     LocationRequest mLocationRequest = createLocationRequest();
+    private Data data;
 
     public static MapsFragment newInstance() {
         MapsFragment fragment = new MapsFragment();
@@ -85,7 +86,7 @@ public class MapsFragment extends Fragment implements DownloadCompleteListener,
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_map, container, false);
-
+        this.data = new Data();
         mMapView = (MapView) rootView.findViewById(R.id.map);
         mMapView.onCreate(savedInstanceState);
 
@@ -102,6 +103,17 @@ public class MapsFragment extends Fragment implements DownloadCompleteListener,
             public void onMapReady(GoogleMap mMap) {
 
                 googleMap = mMap;
+
+                try {
+                    KmlLayer layer = new KmlLayer(mMap, R.raw.pistebici, getContext());
+                    layer.addLayerToMap();
+                    new KmlLayer(mMap, R.raw.places_to_visit, getContext()).addLayerToMap();
+                    new KmlLayer(mMap, R.raw.bicycle_danger_zones_update, getContext()).addLayerToMap();
+                } catch (XmlPullParserException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
 
                 // For showing a move to my location button
                 if (ActivityCompat.checkSelfPermission(getActivity(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
