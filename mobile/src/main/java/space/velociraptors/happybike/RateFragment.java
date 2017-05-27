@@ -1,22 +1,16 @@
 package space.velociraptors.happybike;
 
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
-import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -37,38 +31,22 @@ import java.io.IOException;
  * Created by rpadurariu on 27.05.2017.
  */
 
-public class RateFragment extends Fragment implements GoogleApiClient.ConnectionCallbacks,
-        GoogleApiClient.OnConnectionFailedListener,
-        LocationListener {
+public class RateFragment extends Fragment implements LocationListener {
 
 
     MapView mMapView;
     private GoogleMap googleMap;
     private ProgressDialog mProgressDialog;
-    private GoogleApiClient mGoogleApiClient;
-    private double currentLatitude;
-    private double currentLongitude;
     private Marker currLocationMarker;
-    LocationRequest mLocationRequest = createLocationRequest();
 
     public static RateFragment newInstance() {
         RateFragment fragment = new RateFragment();
         return fragment;
     }
 
-    protected LocationRequest createLocationRequest() {
-        LocationRequest mLocationRequest = new LocationRequest();
-        mLocationRequest.setInterval(10000);
-        mLocationRequest.setFastestInterval(5000);
-        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-        return mLocationRequest;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mGoogleApiClient = new GoogleApiClient.Builder(getActivity()).addConnectionCallbacks(this).addOnConnectionFailedListener(this).addApi(LocationServices.API).build();
-        mGoogleApiClient.connect();
     }
 
     @Override
@@ -120,12 +98,16 @@ public class RateFragment extends Fragment implements GoogleApiClient.Connection
         return rootView;
     }
 
+    private MainActivity getMainActivity() {
+        return (MainActivity)getActivity();
+    }
+
     private void drawMarker() {
         if(currLocationMarker != null) {
             currLocationMarker.remove();
         }
 
-        LatLng myLocation = new LatLng(currentLatitude, currentLongitude);
+        LatLng myLocation = getMainActivity().getMyLocation();
         MarkerOptions markerOptions = new MarkerOptions().position(myLocation).title("I am here");
         currLocationMarker = googleMap.addMarker(markerOptions);
 
@@ -158,55 +140,10 @@ public class RateFragment extends Fragment implements GoogleApiClient.Connection
         mMapView.onLowMemory();
     }
 
-    protected void startLocationUpdates() {
-        if (ActivityCompat.checkSelfPermission(getActivity(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            return;
-        }
-        LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, (LocationListener) this);
-    }
-
-    @Override
-    public void onConnected(Bundle bundle) {
-        if (ActivityCompat.checkSelfPermission(getActivity(), android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-
-            Location mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
-            if (mLastLocation != null) {
-                currentLatitude = mLastLocation.getLatitude();
-                currentLongitude = mLastLocation.getLongitude();
-            }
-            startLocationUpdates();
-        }
-    }
-
-    @Override
-    public void onConnectionSuspended(int i) {
-
-    }
-
-    @Override
-    public void onConnectionFailed(ConnectionResult connectionResult) {
-
-    }
 
     @Override
     public void onLocationChanged(Location location) {
-        currentLatitude = location.getLatitude();
-        currentLongitude = location.getLongitude();
         drawMarker();
-    }
-
-    @Override
-    public void onStart() {
-        System.out.println("In start");
-        super.onStart();
-        mGoogleApiClient.connect();
-    }
-
-    @Override
-    public void onStop() {
-        System.out.println("In stop");
-        super.onStop();
-        mGoogleApiClient.disconnect();
     }
 }
 

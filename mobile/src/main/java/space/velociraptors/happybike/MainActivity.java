@@ -4,16 +4,26 @@ package space.velociraptors.happybike;
  * Created by rpadurariu on 27.05.2017.
  */
 
+import android.content.pm.PackageManager;
+import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationListener;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
@@ -24,13 +34,36 @@ import org.json.JSONObject;
 
 import java.util.Arrays;
 
-public class MainActivity extends AppCompatActivity implements ValueEventListener {
+public class MainActivity extends AppCompatActivity implements
+        ValueEventListener, LocationListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
     private Data data;
     private JSONArray alerts = new JSONArray();
+
+    private Fragment selectedFragment;
+    private GoogleApiClient mGoogleApiClient;
+    private LocationRequest mLocationRequest = createLocationRequest();
+    private double currentLatitude;
+    private double currentLongitude;
+
+
+    protected LocationRequest createLocationRequest() {
+        LocationRequest mLocationRequest = new LocationRequest();
+        mLocationRequest.setInterval(10000);
+        mLocationRequest.setFastestInterval(5000);
+        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        return mLocationRequest;
+    }
+
+    public LatLng getMyLocation() {
+        return new LatLng(currentLatitude, currentLongitude);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mGoogleApiClient = new GoogleApiClient.Builder(this).addConnectionCallbacks(this).addOnConnectionFailedListener(this).addApi(LocationServices.API).build();
+        mGoogleApiClient.connect();
+
         this.data = new Data();
         this.data.get(Const.ALERT_KEY, this);
 
@@ -43,7 +76,6 @@ public class MainActivity extends AppCompatActivity implements ValueEventListene
                 (new BottomNavigationView.OnNavigationItemSelectedListener() {
                     @Override
                     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                        Fragment selectedFragment = null;
                         switch (item.getItemId()) {
                             case R.id.map_action:
                                 selectedFragment = MapsFragment.newInstance();
@@ -102,8 +134,8 @@ public class MainActivity extends AppCompatActivity implements ValueEventListene
             JSONObject a = new JSONObject();
             try {
                 a.put("text", alert);
-                a.put("lon", "21.15");
-                a.put("lat", "21.15");
+                a.put("lon", Double.toString(currentLongitude));
+                a.put("lat", Double.toString(currentLatitude));
                 alerts.put(a);
                 data.put(Const.ALERT_KEY, alerts.toString());
             } catch (JSONException e) {
@@ -115,7 +147,11 @@ public class MainActivity extends AppCompatActivity implements ValueEventListene
     @Override
     public void onDataChange(DataSnapshot dataSnapshot) {
         try {
-            this.alerts = new JSONArray((String)dataSnapshot.getValue());
+            String value = (String)dataSnapshot.getValue();
+            if (value == null) {
+                value = "[]";
+            }
+            this.alerts = new JSONArray(value);
         } catch (JSONException e) {
             // I don't care
         }
@@ -124,5 +160,57 @@ public class MainActivity extends AppCompatActivity implements ValueEventListene
     @Override
     public void onCancelled(DatabaseError databaseError) {
         this.alerts = new JSONArray();
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+        currentLatitude = location.getLatitude();
+        currentLongitude = location.getLongitude();
+        if (selectedFragment != null && selectedFragment instanceof LocationListener) {
+            ((LocationListener)selectedFragment).onLocationChanged(location);
+        }
+    }
+
+    protected void startLocationUpdates() {
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+        LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
+    }
+
+    @Override
+    public void onConnected(Bundle bundle) {
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+
+            Location mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+            if (mLastLocation != null) {
+                currentLatitude = mLastLocation.getLatitude();
+                currentLongitude = mLastLocation.getLongitude();
+            }
+            startLocationUpdates();
+        }
+    }
+    @Override
+    public void onConnectionSuspended(int i) {
+
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
+    }
+
+    @Override
+    public void onStart() {
+        System.out.println("In start");
+        super.onStart();
+        mGoogleApiClient.connect();
+    }
+
+    @Override
+    public void onStop() {
+        System.out.println("In stop");
+        super.onStop();
+        mGoogleApiClient.disconnect();
     }
 }
