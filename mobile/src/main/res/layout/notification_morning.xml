@@ -106,7 +106,6 @@
             android:layout_marginStart="15dp"
             android:text="@string/go_text"
             />
-
     </RelativeLayout>
     <ImageButton
         android:id="@+id/notif_up"

@@ -81,7 +81,7 @@ public class WalkThrough extends AppCompatActivity {
 
         RemoteViews expandedView = new RemoteViews(this.getPackageName(),
                 R.layout.notification_morning);
-        expandedView.setTextViewText(R.id.temperature, "+25 C");
+        expandedView.setTextViewText(R.id.temperature, "25°C");
         expandedView.setTextViewText(R.id.location, "Timisoara");
 
         return new NotificationCompat.Builder(this)
