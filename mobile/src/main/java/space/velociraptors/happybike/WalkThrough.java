@@ -46,7 +46,7 @@ public class WalkThrough extends AppCompatActivity {
     };
 
     private void makeNotification() {
-        Intent resultIntent = new Intent(this, MapsActivity.class);
+        Intent resultIntent = new Intent(this, MainActivity.class);
         resultIntent.putExtra(Const.BIKE_TO, Const.LOC_WORK);
         resultIntent.setFlags(
                 Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -92,7 +92,7 @@ public class WalkThrough extends AppCompatActivity {
     }
 
     private void gotoMapsActivity() {
-        startActivity(new Intent(this, MapsActivity.class));
+        startActivity(new Intent(this, MainActivity.class));
     }
 
     @Override
