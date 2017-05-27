@@ -6,7 +6,7 @@
     <string name="title_activity_maps">Map</string>
     <string name="walkthrough_prev">Back</string>
     <string name="walkthrough_next">Next</string>
-    <string name="go_bike">Let\'s go</string>
+    <string name="go_bike">Let\'s go!</string>
     <string name="go_tram">Take the tram</string>
     <string name="notif_title_good">How about biking to work today?</string>
     <string name="notif_text_good">We will have excellent weather today!</string>
@@ -16,4 +16,6 @@
     <string name="add_menu">ADD</string>
     <string name="scan_menu">SCAN</string>
     <string name="title_activity_main">MainActivity</string>
+    <string name="sample_temperature" translatable="false">25 C</string>
+    <string name="sample_location" translatable="false">Timisoara</string>
 </resources>

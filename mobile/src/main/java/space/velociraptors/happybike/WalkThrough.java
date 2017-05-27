@@ -13,6 +13,7 @@ import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.ImageView;
+import android.widget.RemoteViews;
 
 import static space.velociraptors.happybike.Const.MORNING_NOTIFICATION;
 
@@ -45,15 +46,7 @@ public class WalkThrough extends AppCompatActivity {
         }
     };
 
-    private void makeNotification() {
-        Intent resultIntent = new Intent(this, MainActivity.class);
-        resultIntent.putExtra(Const.BIKE_TO, Const.LOC_WORK);
-        resultIntent.setFlags(
-                Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-
-        PendingIntent piResult = PendingIntent.getActivity(
-                this, 0, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-
+    private Notification bigPicture(PendingIntent goBike, PendingIntent goPublicTransport) {
         String title = this.getString(R.string.notif_title_good);
         String contentText = this.getString(R.string.notif_text_good);
 
@@ -67,21 +60,57 @@ public class WalkThrough extends AppCompatActivity {
                 .bigPicture(picBike)
                 .setBigContentTitle(title)
                 .setSummaryText(contentText);
-        NotificationCompat.Builder mBuilder =
-                new NotificationCompat.Builder(this)
-                        .setSmallIcon(R.drawable.ic_notification)
-                        .setContentTitle(title)
-                        .setContentText(contentText)
-                        .setStyle(notifStyle)
-                        .addAction (R.drawable.ic_action_bike,
-                                getString(R.string.go_bike), piResult)
-                        .addAction (R.drawable.ic_action_tram,
-                                getString(R.string.go_tram), piResult);
-                ;
-        mBuilder.setContentIntent(piResult);
+
+
+        return new NotificationCompat.Builder(this)
+                .setSmallIcon(R.drawable.ic_notification)
+                .setContentTitle(title)
+                .setContentText(contentText)
+                .setStyle(notifStyle)
+                .addAction (R.drawable.ic_action_bike,
+                        getString(R.string.go_bike), goBike)
+                .addAction (R.drawable.ic_action_tram,
+                        getString(R.string.go_tram), goPublicTransport)
+                .setContentIntent(goBike)
+                .build();
+    }
+
+    private Notification bigCustom(PendingIntent goBike, PendingIntent goPublicTransport) {
+        String title = this.getString(R.string.notif_title_good);
+        String contentText = this.getString(R.string.notif_text_good);
+
+        RemoteViews expandedView = new RemoteViews(this.getPackageName(),
+                R.layout.notification_morning);
+        expandedView.setTextViewText(R.id.temperature, "+25 C");
+        expandedView.setTextViewText(R.id.location, "Timisoara");
+
+        return new NotificationCompat.Builder(this)
+                .setSmallIcon(R.drawable.ic_notification)
+                .setContentTitle(title)
+                .setContentText(contentText)
+                .setCustomBigContentView(expandedView)
+                .addAction (R.drawable.ic_action_bike,
+                        getString(R.string.go_bike), goBike)
+                .addAction (R.drawable.ic_action_tram,
+                        getString(R.string.go_tram), goPublicTransport)
+                .setContentIntent(goBike)
+                .build();
+    }
+
+
+    private void makeNotification() {
+        Intent resultIntent = new Intent(this, MainActivity.class);
+        resultIntent.putExtra(Const.BIKE_TO, Const.LOC_WORK);
+        resultIntent.setFlags(
+                Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+
+        PendingIntent piResult = PendingIntent.getActivity(
+                this, 0, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        Notification notifView = bigCustom(piResult, piResult);
 
         NotificationManager mNotifyMgr = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        mNotifyMgr.notify(MORNING_NOTIFICATION, mBuilder.build());
+        mNotifyMgr.notify(MORNING_NOTIFICATION, notifView);
     }
 
     private void updateWalkthrough() {
