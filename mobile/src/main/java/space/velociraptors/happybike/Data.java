@@ -53,7 +53,7 @@ public class Data {
         database = FirebaseDatabase.getInstance();
     }
 
-    public void put(String key, String value) {
+    public void put(String key, Object value) {
         DatabaseReference myRef = database.getReference(key);
         myRef.setValue(value);
     }
