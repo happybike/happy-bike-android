@@ -53,8 +53,8 @@ public class MapsFragment extends Fragment implements DownloadCompleteListener,
     private GoogleMap googleMap;
     private ProgressDialog mProgressDialog;
     private GoogleApiClient mGoogleApiClient;
-    private double latitude;
-    private double longitude;
+    private double currentLatitude;
+    private double currentLongitude;
     private Marker currLocationMarker;
     LocationRequest mLocationRequest = createLocationRequest();
 
@@ -141,12 +141,12 @@ public class MapsFragment extends Fragment implements DownloadCompleteListener,
             currLocationMarker.remove();
         }
 
-        LatLng myLocation = new LatLng(latitude, longitude);
-        MarkerOptions markerOptions = new MarkerOptions().position(myLocation).title("I am here").snippet("Marker Description");
+        LatLng myLocation = new LatLng(currentLatitude, currentLongitude);
+        MarkerOptions markerOptions = new MarkerOptions().position(myLocation).title("I am here");
         currLocationMarker = googleMap.addMarker(markerOptions);
 
         // For zooming automatically to the location of the marker
-        CameraPosition cameraPosition = new CameraPosition.Builder().target(myLocation).zoom(15).build();
+        CameraPosition cameraPosition = new CameraPosition.Builder().target(myLocation).zoom(16).build();
         googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
     }
 
@@ -865,8 +865,8 @@ public class MapsFragment extends Fragment implements DownloadCompleteListener,
 
             Location mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
             if (mLastLocation != null) {
-                latitude = mLastLocation.getLatitude();
-                longitude = mLastLocation.getLongitude();
+                currentLatitude = mLastLocation.getLatitude();
+                currentLongitude = mLastLocation.getLongitude();
             }
             startLocationUpdates();
         }
@@ -884,8 +884,8 @@ public class MapsFragment extends Fragment implements DownloadCompleteListener,
 
     @Override
     public void onLocationChanged(Location location) {
-        latitude = location.getLatitude();
-        longitude = location.getLongitude();
+        currentLatitude = location.getLatitude();
+        currentLongitude = location.getLongitude();
         drawMarker();
     }
 
