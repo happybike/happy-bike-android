@@ -19,6 +19,9 @@
         android:layout_centerHorizontal="true"
         android:layout_below="@id/add_title"
         android:text="Safe spot"
+        android:background="@color/itemMenuSelected"
+        android:textColor="@color/colorMenu"
+        android:layout_marginTop="@dimen/fab_margin"
         />
 
     <Button
@@ -28,6 +31,9 @@
         android:layout_centerHorizontal="true"
         android:layout_below="@id/add_safe_spot"
         android:text="Bike service"
+        android:background="@color/itemMenuSelected"
+        android:textColor="@color/colorMenu"
+        android:layout_marginTop="@dimen/fab_margin"
         />
 
     <Button
@@ -37,6 +43,9 @@
         android:layout_centerHorizontal="true"
         android:layout_below="@id/add_bike_repair"
         android:text="Bike shop"
+        android:background="@color/itemMenuSelected"
+        android:textColor="@color/colorMenu"
+        android:layout_marginTop="@dimen/fab_margin"
         />
 
 </RelativeLayout>

@@ -12,14 +12,29 @@
         android:text="Call for Help"
         android:textSize="30sp"/>
 
+    <TextView
+        android:id="@+id/help_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/help_title"
+        android:paddingLeft="@dimen/fab_margin"
+        android:paddingRight="@dimen/fab_margin"
+        android:text="Alert other bikers and get help fast. Choose from one of the emergencies bellow."
+        android:textSize="15sp"/>
+
+
     <Button
         android:id="@+id/alert_accident"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/help_title"
-        android:text="Accident"
+        android:layout_below="@id/help_description"
+        android:text="I had an accident!"
+        android:background="@color/itemMenuSelected"
+        android:textColor="@color/colorMenu"
         android:onClick="onAlert"
+        android:layout_marginTop="@dimen/fab_margin"
         />
 
     <Button
@@ -28,8 +43,11 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/alert_accident"
-        android:text="Broken bike"
+        android:text="My bike broke!"
+        android:background="@color/itemMenuSelected"
+        android:textColor="@color/colorMenu"
         android:onClick="onAlert"
+        android:layout_marginTop="@dimen/fab_margin"
         />
 
     <Button
@@ -38,7 +56,10 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/alert_broken_bike"
-        android:text="Stolen bike"
+        android:text="Someone stole my bike!"
+        android:background="@color/itemMenuSelected"
+        android:textColor="@color/colorMenu"
         android:onClick="onAlert"
+        android:layout_marginTop="@dimen/fab_margin"
         />
 </RelativeLayout>
