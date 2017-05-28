@@ -7,6 +7,7 @@ package space.velociraptors.happybike;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -72,6 +73,8 @@ public class MainActivity extends AppCompatActivity implements
         this.data = new Data();
         this.data.get(Const.ALERTS_KEY, this);
         this.data.get(Const.ALERT_LATEST_KEY, new NotificationOnAlert());
+        this.currentLatitude = 45.7481971;
+        this.currentLongitude = 21.2401086;
 
         setContentView(R.layout.activity_main);
         BottomNavigationView bottomNavigationView = (BottomNavigationView)
@@ -107,9 +110,24 @@ public class MainActivity extends AppCompatActivity implements
                 });
 
         //Manually displaying the first fragment - one time only
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.frame_layout, MapsFragment.newInstance());
-        transaction.commit();
+
+        if (!getIntent().hasExtra(Const.NOTIF_CMD)) {
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.frame_layout, MapsFragment.newInstance());
+            transaction.commit();
+        } else {
+            String cmd = getIntent().getExtras().getString(Const.NOTIF_CMD, "");
+            if (cmd.equals(Const.CMD_ALERT)) {
+                String text = getIntent().getExtras().getString(Const.ALERT_TEXT);
+                double lon = getIntent().getExtras().getDouble(Const.ALERT_TEXT);
+                double lat = getIntent().getExtras().getDouble(Const.ALERT_TEXT);
+                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                MapsFragment mf = MapsFragment.newInstance();
+                mf.setAlert(text, lon, lat);
+                transaction.replace(R.id.frame_layout, mf);
+                transaction.commit();
+            }
+        }
 
         //Used to select an item programmatically
         //bottomNavigationView.getMenu().getItem(2).setChecked(true);
@@ -230,10 +248,13 @@ public class MainActivity extends AppCompatActivity implements
                 if (value == null) {
                     value = "[]";
                 }
-                String text = new JSONObject(value).getString("text");
+                JSONObject jv = new JSONObject(value);
+                String text = jv.getString("text");
+                double lon = Double.parseDouble(jv.getString("lon"));
+                double lat = Double.parseDouble(jv.getString("lat"));
 
                 NotificationManager mNotifyMgr = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-                mNotifyMgr.notify(MORNING_NOTIFICATION, bigPicture(text));
+                mNotifyMgr.notify(Const.ALERT_NOTIFICATION, alertNotification(text, lon, lat));
             } catch (JSONException e) {
                 // I don't care
             }
@@ -244,11 +265,19 @@ public class MainActivity extends AppCompatActivity implements
 
         }
 
-        private Notification bigPicture(String text) {
-            Bitmap iconBike = BitmapFactory.decodeResource(getResources(),
-                    R.drawable.ic_action_bike);
-            Bitmap picBike = BitmapFactory.decodeResource(getResources(),
-                    R.drawable.bikeway);
+        private Notification alertNotification(String text, double lon, double lat) {
+            Intent resultIntent = new Intent(MainActivity.this, MainActivity.class);
+            resultIntent.putExtra(Const.NOTIF_CMD, Const.CMD_ALERT);
+            resultIntent.putExtra(Const.ALERT_LON, lon);
+            resultIntent.putExtra(Const.ALERT_LAT, lat);
+            resultIntent.putExtra(Const.ALERT_TEXT, text);
+
+            resultIntent.setFlags(
+                    Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+
+            PendingIntent piResult = PendingIntent.getActivity(
+                    MainActivity.this, 0, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
 
             NotificationCompat.Style notifStyle = new NotificationCompat.BigTextStyle()
                     .setBigContentTitle("Alert")
@@ -260,6 +289,7 @@ public class MainActivity extends AppCompatActivity implements
                     .setContentTitle("Alert")
                     .setContentText(text)
                     .setStyle(notifStyle)
+                    .setContentIntent(piResult)
                     .build();
         }
     }

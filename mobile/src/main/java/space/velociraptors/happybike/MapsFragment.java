@@ -49,10 +49,26 @@ public class MapsFragment extends Fragment implements DownloadCompleteListener, 
     private GoogleMap googleMap;
     private ProgressDialog mProgressDialog;
     private Marker currLocationMarker;
+    private String alertText = null;
+    private double alertLon, alertLat;
 
     public static MapsFragment newInstance() {
         MapsFragment fragment = new MapsFragment();
         return fragment;
+    }
+
+    public void setAlert(String text, double lon, double lat) {
+        this.alertLat = lat;
+        this.alertLon = lon;
+        this.alertText = text;
+    }
+
+    private void addAlertMarker() {
+        if (alertText == null)
+            return;
+        googleMap.addMarker(new MarkerOptions()
+                .position(new LatLng(alertLat, alertLon))
+                .title(alertText));
     }
 
     @Override
@@ -90,7 +106,7 @@ public class MapsFragment extends Fragment implements DownloadCompleteListener, 
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-
+                addAlertMarker();
                 // For showing a move to my location button
                 if (ActivityCompat.checkSelfPermission(getActivity(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                     // TODO: Consider calling
