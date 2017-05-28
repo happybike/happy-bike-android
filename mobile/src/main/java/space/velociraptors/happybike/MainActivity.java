@@ -236,7 +236,7 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     public class NotificationOnAlert implements ValueEventListener {
-        private boolean first = false;
+        private boolean first = true;
 
         @Override
         public void onDataChange(DataSnapshot dataSnapshot) {
@@ -287,7 +287,8 @@ public class MainActivity extends AppCompatActivity implements
 
             return new NotificationCompat.Builder(MainActivity.this)
                     .setSmallIcon(R.drawable.ic_notification)
-                    .setContentTitle("Alert")
+                    .setContentTitle("Alert!")
+                    .setSubText(text)
                     .setContentText(text)
                     .setStyle(notifStyle)
                     .setContentIntent(piResult)
