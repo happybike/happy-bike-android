@@ -72,9 +72,13 @@ public class MapsFragment extends Fragment implements DownloadCompleteListener, 
     private boolean addAlertMarker() {
         if (alertText == null)
             return false;
-        googleMap.addMarker(new MarkerOptions()
+
+        Drawable drawable = getActivity().getResources().getDrawable(R.drawable.pin_help);
+        MarkerOptions markerOptions = new MarkerOptions()
                 .position(new LatLng(alertLat, alertLon))
-                .title(alertText));
+                .title(alertText)
+                .icon(BitmapDescriptorFactory.fromBitmap(((BitmapDrawable)drawable).getBitmap()));
+        googleMap.addMarker(markerOptions);
         return true;
     }
 
