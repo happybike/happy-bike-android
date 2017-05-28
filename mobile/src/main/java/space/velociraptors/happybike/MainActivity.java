@@ -4,16 +4,21 @@ package space.velociraptors.happybike;
  * Created by rpadurariu on 27.05.2017.
  */
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
@@ -32,7 +37,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.Arrays;
+import static space.velociraptors.happybike.Const.MORNING_NOTIFICATION;
 
 public class MainActivity extends AppCompatActivity implements
         ValueEventListener, LocationListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
@@ -65,7 +70,8 @@ public class MainActivity extends AppCompatActivity implements
         mGoogleApiClient.connect();
 
         this.data = new Data();
-        this.data.get(Const.ALERT_KEY, this);
+        this.data.get(Const.ALERTS_KEY, this);
+        this.data.get(Const.ALERT_LATEST_KEY, new NotificationOnAlert());
 
         setContentView(R.layout.activity_main);
         BottomNavigationView bottomNavigationView = (BottomNavigationView)
@@ -137,7 +143,8 @@ public class MainActivity extends AppCompatActivity implements
                 a.put("lon", Double.toString(currentLongitude));
                 a.put("lat", Double.toString(currentLatitude));
                 alerts.put(a);
-                data.put(Const.ALERT_KEY, alerts.toString());
+                data.put(Const.ALERTS_KEY, alerts.toString());
+                data.put(Const.ALERT_LATEST_KEY, a.toString());
             } catch (JSONException e) {
                 // I don't care
             }
@@ -212,5 +219,48 @@ public class MainActivity extends AppCompatActivity implements
         System.out.println("In stop");
         super.onStop();
         mGoogleApiClient.disconnect();
+    }
+
+    public class NotificationOnAlert implements ValueEventListener {
+
+        @Override
+        public void onDataChange(DataSnapshot dataSnapshot) {
+            try {
+                String value = (String)dataSnapshot.getValue();
+                if (value == null) {
+                    value = "[]";
+                }
+                String text = new JSONObject(value).getString("text");
+
+                NotificationManager mNotifyMgr = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+                mNotifyMgr.notify(MORNING_NOTIFICATION, bigPicture(text));
+            } catch (JSONException e) {
+                // I don't care
+            }
+        }
+
+        @Override
+        public void onCancelled(DatabaseError databaseError) {
+
+        }
+
+        private Notification bigPicture(String text) {
+            Bitmap iconBike = BitmapFactory.decodeResource(getResources(),
+                    R.drawable.ic_action_bike);
+            Bitmap picBike = BitmapFactory.decodeResource(getResources(),
+                    R.drawable.bikeway);
+
+            NotificationCompat.Style notifStyle = new NotificationCompat.BigTextStyle()
+                    .setBigContentTitle("Alert")
+                    .setSummaryText(text);
+
+
+            return new NotificationCompat.Builder(MainActivity.this)
+                    .setSmallIcon(R.drawable.ic_notification)
+                    .setContentTitle("Alert")
+                    .setContentText(text)
+                    .setStyle(notifStyle)
+                    .build();
+        }
     }
 }

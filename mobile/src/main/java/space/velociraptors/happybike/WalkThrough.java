@@ -47,35 +47,6 @@ public class WalkThrough extends AppCompatActivity {
         }
     };
 
-    private Notification bigPicture(PendingIntent goBike, PendingIntent goPublicTransport) {
-        String title = this.getString(R.string.notif_title_good);
-        String contentText = this.getString(R.string.notif_text_good);
-
-        Bitmap iconBike = BitmapFactory.decodeResource(getResources(),
-                R.drawable.ic_action_bike);
-        Bitmap picBike = BitmapFactory.decodeResource(getResources(),
-                R.drawable.bikeway);
-
-        NotificationCompat.Style notifStyle = new NotificationCompat.BigPictureStyle()
-                .bigLargeIcon(iconBike)
-                .bigPicture(picBike)
-                .setBigContentTitle(title)
-                .setSummaryText(contentText);
-
-
-        return new NotificationCompat.Builder(this)
-                .setSmallIcon(R.drawable.ic_notification)
-                .setContentTitle(title)
-                .setContentText(contentText)
-                .setStyle(notifStyle)
-                .addAction (R.drawable.ic_action_bike,
-                        getString(R.string.go_bike), goBike)
-                .addAction (R.drawable.ic_action_tram,
-                        getString(R.string.go_tram), goPublicTransport)
-                .setContentIntent(goBike)
-                .build();
-    }
-
     private Notification bigCustom(PendingIntent goBike, PendingIntent goPublicTransport) {
         String title = this.getString(R.string.notif_title_good);
         String contentText = this.getString(R.string.notif_text_good);
