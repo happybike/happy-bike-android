@@ -83,7 +83,7 @@ public class RateFragment extends Fragment implements LocationListener {
                     mLayer.setOnFeatureClickListener(new KmlLayer.OnFeatureClickListener() {
                         @Override
                         public void onFeatureClick(Feature feature) {
-                            CharSequence colors[] = new CharSequence[] {"red", "green", "blue", "grey"};
+                            CharSequence colors[] = new CharSequence[] {"GREEN ( Very good zone )", "BLUE ( OK zone )", "RED ( Bad zone )", "GREY ( MEH zone)"};
 
                             AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                             builder.setTitle("Pick a color");
