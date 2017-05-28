@@ -1,6 +1,12 @@
 package space.velociraptors.happybike;
 
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
@@ -217,7 +223,7 @@ public class MapsFragment extends Fragment implements DownloadCompleteListener, 
     private String title;
     private int noBikes;
 
-    private Drawable getStationPin(int noBikes) {
+    private BitmapDrawable getStationPin(int noBikes) {
         int pin = R.drawable.pinyellow;
         if (noBikes < 5) {
             pin = R.drawable.pingray;
@@ -225,8 +231,31 @@ public class MapsFragment extends Fragment implements DownloadCompleteListener, 
             pin = R.drawable.pinblue;
         }
 
-        //noinspection ResourceType
-        return getActivity().getResources().getDrawable(pin);
+//        //noinspection ResourceType
+//        Bitmap bitmap = BitmapFactory.decodeResource(getActivity().getResources(), pin);
+//        Canvas canvas = new Canvas(bitmap);
+//        Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+//        paint.setColor(Color.WHITE); // Text color
+//        paint.setTextSize(14); // Text size
+//
+//        int x = bitmap.getWidth() - 10; // 10 for padding from right
+//        int y = bitmap.getHeight() - 10;
+//        canvas.drawText(noBikes+"", x, y, paint);
+//        return bitmap;
+
+
+        Bitmap bm = BitmapFactory.decodeResource(getActivity().getResources(), pin).copy(Bitmap.Config.ARGB_8888, true);
+
+        Paint paint = new Paint();
+        paint.setStyle(Paint.Style.FILL);
+        paint.setColor(Color.WHITE);
+        paint.setTextSize(30);
+        paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
+
+        Canvas canvas = new Canvas(bm);
+        canvas.drawText(noBikes+"", bm.getWidth()/2-12, bm.getHeight()/2, paint);
+
+        return new BitmapDrawable(bm);
     }
 
     @Override
@@ -237,7 +266,7 @@ public class MapsFragment extends Fragment implements DownloadCompleteListener, 
                 station = stations.getJSONObject(i);
                 latitude = station.getDouble("Latitude");
                 longitude = station.getDouble("Longitude");
-                title = station.getString("StationName");
+                title = "Bikes Station: " + station.getString("StationName");
                 noBikes = station.getInt("EmptySpots");
 
             } catch (JSONException e) {
@@ -246,7 +275,7 @@ public class MapsFragment extends Fragment implements DownloadCompleteListener, 
             googleMap.addMarker(new MarkerOptions()
                     .position(new LatLng(latitude, longitude))
                     .title(title)
-                    .icon(BitmapDescriptorFactory.fromBitmap(((BitmapDrawable)getStationPin(noBikes)).getBitmap())));
+                    .icon(BitmapDescriptorFactory.fromBitmap((getStationPin(noBikes)).getBitmap())));
         }
     }
 
