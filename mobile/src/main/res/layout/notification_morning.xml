@@ -119,4 +119,53 @@
         android:src="@drawable/notification_up"
         android:background="@android:color/transparent"
         />
+
+    <ImageButton
+        android:id="@+id/time_bike"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="15dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginBottom="10dp"
+        android:layout_above="@id/go_container"
+        android:src="@drawable/ic_action_bike_white"
+        android:background="@android:color/transparent"
+        />
+    <ImageButton
+        android:id="@+id/time_car"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="15dp"
+        android:layout_marginStart="15dp"
+        android:layout_above="@id/time_bike"
+        android:src="@drawable/ic_action_car"
+        android:background="@android:color/transparent"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="35 mins (heavy traffic)"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="55dp"
+        android:layout_marginStart="55dp"
+        android:layout_marginBottom="5dp"
+        android:layout_above="@id/time_bike"
+        android:textColor="@color/colorNotifAccent"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="20 mins"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="55dp"
+        android:layout_marginStart="55dp"
+        android:layout_marginBottom="15dp"
+        android:layout_above="@id/go_container"
+        android:textColor="@color/colorNotifAccent"/>
+
 </RelativeLayout>
