@@ -1,6 +1,7 @@
 package space.velociraptors.happybike;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -8,6 +9,8 @@ import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,12 +26,13 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.maps.android.data.Feature;
 import com.google.maps.android.data.kml.KmlLayer;
 
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
-
+import android.app.AlertDialog.Builder;
 
 /**
  * Created by rpadurariu on 27.05.2017.
@@ -74,7 +78,24 @@ public class RateFragment extends Fragment implements LocationListener {
                 googleMap = mMap;
 
                 try {
-                    new KmlLayer(mMap, R.raw.bicycle_danger_zones_update, getContext()).addLayerToMap();
+                    KmlLayer mLayer = new KmlLayer(mMap, R.raw.bicycle_danger_zones_update, getContext());
+                    mLayer.addLayerToMap();
+                    mLayer.setOnFeatureClickListener(new KmlLayer.OnFeatureClickListener() {
+                        @Override
+                        public void onFeatureClick(Feature feature) {
+                            CharSequence colors[] = new CharSequence[] {"red", "green", "blue", "grey"};
+
+                            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                            builder.setTitle("Pick a color");
+                            builder.setItems(colors, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    // the user clicked on colors[which]
+                                }
+                            });
+                            builder.show();
+                        }
+                    });
                 } catch (XmlPullParserException e) {
                     e.printStackTrace();
                 } catch (IOException e) {
