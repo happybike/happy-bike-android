@@ -84,7 +84,7 @@ public class MapsFragment extends Fragment implements DownloadCompleteListener, 
                     KmlLayer layer = new KmlLayer(mMap, R.raw.pistebici, getContext());
                     layer.addLayerToMap();
                     new KmlLayer(mMap, R.raw.places_to_visit, getContext()).addLayerToMap();
-                    new KmlLayer(mMap, R.raw.bicycle_danger_zones_update, getContext()).addLayerToMap();
+//                    new KmlLayer(mMap, R.raw.bicycle_danger_zones_update, getContext()).addLayerToMap();
                 } catch (XmlPullParserException e) {
                     e.printStackTrace();
                 } catch (IOException e) {
@@ -137,7 +137,7 @@ public class MapsFragment extends Fragment implements DownloadCompleteListener, 
         }
 
         LatLng myLocation = getMainActivity().getMyLocation();
-        Drawable drawable = getActivity().getResources().getDrawable(R.drawable.my_location_pin);
+        Drawable drawable = getActivity().getResources().getDrawable(R.drawable.pinhappy);
         MarkerOptions markerOptions = new MarkerOptions().position(myLocation).title("I am here")
                 .icon(BitmapDescriptorFactory.fromBitmap(((BitmapDrawable)drawable).getBitmap()));
         currLocationMarker = googleMap.addMarker(markerOptions);

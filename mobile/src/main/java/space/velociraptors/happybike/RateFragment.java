@@ -2,6 +2,8 @@ package space.velociraptors.happybike;
 
 import android.app.ProgressDialog;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
@@ -16,6 +18,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
@@ -89,7 +92,7 @@ public class RateFragment extends Fragment implements LocationListener {
                     // for ActivityCompat#requestPermissions for more details.
                     return;
                 }
-                googleMap.setMyLocationEnabled(true);
+//                googleMap.setMyLocationEnabled(true);
 
                 drawMarker();
             }
@@ -108,7 +111,9 @@ public class RateFragment extends Fragment implements LocationListener {
         }
 
         LatLng myLocation = getMainActivity().getMyLocation();
-        MarkerOptions markerOptions = new MarkerOptions().position(myLocation).title("I am here");
+        Drawable drawable = getActivity().getResources().getDrawable(R.drawable.pinhappy);
+        MarkerOptions markerOptions = new MarkerOptions().position(myLocation).title("I am here")
+                .icon(BitmapDescriptorFactory.fromBitmap(((BitmapDrawable)drawable).getBitmap()));
         currLocationMarker = googleMap.addMarker(markerOptions);
 
         // For zooming automatically to the location of the marker
