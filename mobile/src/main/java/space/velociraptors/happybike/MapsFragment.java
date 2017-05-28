@@ -196,11 +196,11 @@ public class MapsFragment extends Fragment implements DownloadCompleteListener, 
     private int noBikes;
 
     private Drawable getStationPin(int noBikes) {
-        int pin = R.raw.pinyellow;
+        int pin = R.drawable.pinyellow;
         if (noBikes < 5) {
-            pin = R.raw.pingray;
+            pin = R.drawable.pingray;
         } else if (noBikes < 15) {
-            pin = R.raw.pinblue;
+            pin = R.drawable.pinblue;
         }
 
         //noinspection ResourceType
@@ -221,10 +221,10 @@ public class MapsFragment extends Fragment implements DownloadCompleteListener, 
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-
             googleMap.addMarker(new MarkerOptions()
                     .position(new LatLng(latitude, longitude))
-                    .title(title));
+                    .title(title)
+                    .icon(BitmapDescriptorFactory.fromBitmap(((BitmapDrawable)getStationPin(noBikes)).getBitmap())));
         }
     }
 
