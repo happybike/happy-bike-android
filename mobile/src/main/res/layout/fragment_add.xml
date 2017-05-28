@@ -5,10 +5,38 @@
     tools:context="space.velociraptors.happybike.AddFragment">
 
     <TextView
+        android:id="@+id/add_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:text="Add"
         android:textSize="30sp"/>
+
+    <Button
+        android:id="@+id/add_safe_spot"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/add_title"
+        android:text="Safe spot"
+        />
+
+    <Button
+        android:id="@+id/add_bike_repair"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/add_safe_spot"
+        android:text="Bike service"
+        />
+
+    <Button
+        android:id="@+id/add_bike_shop"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/add_bike_repair"
+        android:text="Bike shop"
+        />
 
 </RelativeLayout>
