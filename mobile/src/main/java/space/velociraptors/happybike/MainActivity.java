@@ -119,8 +119,8 @@ public class MainActivity extends AppCompatActivity implements
             String cmd = getIntent().getExtras().getString(Const.NOTIF_CMD, "");
             if (cmd.equals(Const.CMD_ALERT)) {
                 String text = getIntent().getExtras().getString(Const.ALERT_TEXT);
-                double lon = getIntent().getExtras().getDouble(Const.ALERT_TEXT);
-                double lat = getIntent().getExtras().getDouble(Const.ALERT_TEXT);
+                double lon = getIntent().getExtras().getDouble(Const.ALERT_LON);
+                double lat = getIntent().getExtras().getDouble(Const.ALERT_LAT);
                 FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
                 MapsFragment mf = MapsFragment.newInstance();
                 mf.setAlert(text, lon, lat);
@@ -131,10 +131,6 @@ public class MainActivity extends AppCompatActivity implements
 
         //Used to select an item programmatically
         //bottomNavigationView.getMenu().getItem(2).setChecked(true);
-    }
-
-    public void daLocatia() {
-
     }
 
     public void onAlert(View view) {
@@ -240,10 +236,15 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     public class NotificationOnAlert implements ValueEventListener {
+        private boolean first = false;
 
         @Override
         public void onDataChange(DataSnapshot dataSnapshot) {
             try {
+                if (first) {
+                    first = false;
+                    return;
+                }
                 String value = (String)dataSnapshot.getValue();
                 if (value == null) {
                     value = "[]";

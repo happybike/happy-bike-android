@@ -63,12 +63,13 @@ public class MapsFragment extends Fragment implements DownloadCompleteListener, 
         this.alertText = text;
     }
 
-    private void addAlertMarker() {
+    private boolean addAlertMarker() {
         if (alertText == null)
-            return;
+            return false;
         googleMap.addMarker(new MarkerOptions()
                 .position(new LatLng(alertLat, alertLon))
                 .title(alertText));
+        return true;
     }
 
     @Override
@@ -159,8 +160,13 @@ public class MapsFragment extends Fragment implements DownloadCompleteListener, 
         currLocationMarker = googleMap.addMarker(markerOptions);
 
         // For zooming automatically to the location of the marker
-        CameraPosition cameraPosition = new CameraPosition.Builder().target(myLocation).zoom(16).build();
-        googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+        if (alertText == null) {
+            CameraPosition cameraPosition = new CameraPosition.Builder().target(myLocation).zoom(16).build();
+            googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+        } else {
+            CameraPosition cameraPosition = new CameraPosition.Builder().target(new LatLng(alertLat, alertLon)).zoom(20).build();
+            googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+        }
     }
 
     @Override
