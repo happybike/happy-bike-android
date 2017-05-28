@@ -662,23 +662,6 @@ public class MapsFragment extends Fragment implements DownloadCompleteListener, 
                     "      \"Id\": 27\n" +
                     "    },\n" +
                     "    {\n" +
-                    "      \"StationName\": \"Statie Virtuala\",\n" +
-                    "      \"Address\": \"asdasd\",\n" +
-                    "      \"OcuppiedSpots\": 0,\n" +
-                    "      \"EmptySpots\": 0,\n" +
-                    "      \"MaximumNumberOfBikes\": 0,\n" +
-                    "      \"LastSyncDate\": \"01.01.2013 00:00\",\n" +
-                    "      \"IdStatus\": 1,\n" +
-                    "      \"Status\": \"Functionala\",\n" +
-                    "      \"StatusType\": \"Offline\",\n" +
-                    "      \"Latitude\": 0,\n" +
-                    "      \"Longitude\": 0,\n" +
-                    "      \"IsValid\": true,\n" +
-                    "      \"CustomIsValid\": false,\n" +
-                    "      \"Notifies\": [],\n" +
-                    "      \"Id\": 28\n" +
-                    "    },\n" +
-                    "    {\n" +
                     "      \"StationName\": \"Statia7-Dragalina\",\n" +
                     "      \"Address\": \"Pod Dragalina\",\n" +
                     "      \"OcuppiedSpots\": 5,\n" +
